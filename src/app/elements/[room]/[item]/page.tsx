@@ -1,12 +1,9 @@
 import Link from "next/link";
 import { rooms } from "@/lib/data";
+import curatedRaw from "@/lib/curated-images.json";
 import { ArrowLeft } from "lucide-react";
 
-function itemImages(itemName: string, count = 12): string[] {
-  return Array.from({ length: count }, (_, i) =>
-    `/api/images?q=${encodeURIComponent(itemName + " interior design")}&i=${i}&w=800`
-  );
-}
+const C = curatedRaw as Record<string, string[]>;
 
 export default async function ItemPage({
   params,
@@ -16,7 +13,6 @@ export default async function ItemPage({
   const { room: roomSlug, item: itemSlug } = await params;
   const room = rooms.find((r) => r.slug === roomSlug);
   const item = room?.items.find((i) => i.slug === itemSlug);
-  const images = itemImages(item?.name || itemSlug, 12);
 
   if (!room || !item) {
     return (
@@ -29,6 +25,7 @@ export default async function ItemPage({
     );
   }
 
+  const images = C[itemSlug] || C[itemSlug.replace(/-/g, " ")] || [];
   const displayName = item.name.charAt(0).toUpperCase() + item.name.slice(1);
 
   return (
@@ -42,7 +39,7 @@ export default async function ItemPage({
             <p className="label mb-3 text-[#8FA88A]">{room.name} · {item.count} designs</p>
             <h1 className="heading-xl text-[#3D3227]" style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}>{displayName}</h1>
           </div>
-          <p className="body-lg text-[#A0988E] max-w-[400px]">A curated collection of {displayName.toLowerCase()} across styles.</p>
+          <p className="body-lg text-[#A0988E] max-w-[400px]">A curated collection of {displayName.toLowerCase()} — fixed, hand-picked images.</p>
         </div>
       </div>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-14 pb-24">

@@ -3,6 +3,9 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { rooms } from "@/lib/data";
+import curatedRaw from "@/lib/curated-images.json";
+
+const C = curatedRaw as Record<string, string[]>;
 
 const colorPalettes = [
   {
@@ -10,42 +13,42 @@ const colorPalettes = [
     mood: "Grounded & Serene",
     colors: ["#D4C5B9", "#C4A882", "#A89880", "#8B7355", "#6B5B4F"],
     description: "Rooted in nature — warm neutrals for quiet contemplation.",
-    image: "/api/images?q=warm%20earth%20tone%20interior&i=20&w=600",
+    image: C["wabi-minimal"]?.[2] || "",
   },
   {
     name: "Sage Calm",
     mood: "Fresh & Peaceful",
     colors: ["#E2EBDF", "#B8C9B2", "#8FA88A", "#6B8B65", "#4A5C3F"],
     description: "Green-driven serenity — botanical calm for every room.",
-    image: "/api/images?q=sage%20green%20interior%20calm&i=21&w=600",
+    image: C["japan-interior"]?.[5] || "",
   },
   {
     name: "Coastal Haze",
     mood: "Airy & Luminous",
     colors: ["#F5F0EB", "#E8E0D8", "#D4CAC0", "#C5BFB5", "#B8B0A6"],
     description: "Misted coastlines and sun-bleached stone — effortless elegance.",
-    image: "/api/images?q=coastal%20airy%20luminous%20interior&i=22&w=600",
+    image: C["italy-interior"]?.[6] || "",
   },
   {
     name: "Deep Cocoa",
     mood: "Dramatic & Refined",
     colors: ["#3C3028", "#4A3F35", "#5C4A3A", "#7A6050", "#A08464"],
     description: "Dark, sophisticated tones — depth and drama in architectural spaces.",
-    image: "/api/images?q=dark%20cocoa%20dramatic%20interior&i=23&w=600",
+    image: C["wabi-minimal"]?.[4] || "",
   },
   {
     name: "Terracotta Bloom",
     mood: "Warm & Inviting",
     colors: ["#C4956A", "#D4A87C", "#E8D5C0", "#F0E8DD", "#A08060"],
     description: "Sun-baked clay and desert bloom — spaces that embrace you.",
-    image: "/api/images?q=terracotta%20warm%20inviting%20interior&i=24&w=600",
+    image: C["morocco-interior"]?.[3] || "",
   },
   {
     name: "Nordic Light",
     mood: "Clean & Bright",
     colors: ["#FAFAF8", "#E8E4DD", "#D5CFC7", "#C0B8AE", "#A0988E"],
     description: "The gentle light of Nordic mornings — whisper-soft and functional.",
-    image: "/api/images?q=nordic%20light%20clean%20bright%20interior&i=25&w=600",
+    image: C["denmark-interior"]?.[7] || "",
   },
 ];
 
