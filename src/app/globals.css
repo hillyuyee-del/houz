@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+/* ── Brown-Green Calm Palette ── */
+:root {
+  --color-cream: #F7F4EF;
+  --color-cream-dark: #EDE8E0;
+  --color-sage: #8FA88A;
+  --color-sage-dark: #6B8B65;
+  --color-sage-light: #B8C9B2;
+  --color-sage-pale: #E2EBDF;
+  --color-brown: #8B7355;
+  --color-brown-dark: #5C4A3A;
+  --color-brown-light: #A08464;
+  --color-brown-pale: #D4C4AE;
+  --color-olive: #6B7F5E;
+  --color-olive-dark: #4A5C3F;
+  --color-terracotta: #C4956A;
+  --color-text: #3D3227;
+  --color-text-muted: #7A7065;
+  --color-text-light: #A0988E;
+  --color-border: rgba(61, 50, 39, 0.08);
+  --color-border-strong: rgba(61, 50, 39, 0.15);
+}
+
+@theme inline {
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-text);
+  --color-muted: var(--color-text-muted);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+
+/* ── Base ── */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-text);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-sage-light);
+  color: var(--color-olive-dark);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-brown-pale); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brown-light); }
+
+/* ── Typography ── */
+.heading-xl {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.heading-lg {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.heading-md {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.18;
+}
+
+.heading-sm {
+  font-family: "Playfair Display", ui-serif, Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.body-lg {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+.body-sm {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-text-light);
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+/* ── Image Treatment ── */
+.img-subtle {
+  box-shadow: 0 0 0 1px rgba(61, 50, 39, 0.06);
+}
+
+.img-hover {
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.img-hover:hover {
+  transform: scale(1.04);
+}
+
+/* ── Reveal animation ── */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+              transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ── Line clamp ── */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
