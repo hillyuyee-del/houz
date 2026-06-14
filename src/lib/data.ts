@@ -20,8 +20,8 @@ export interface Room { slug: string; name: string; subtitle: string; cover: str
 export const countries: Country[] = [
   { slug: "japan", name: "Japan", subtitle: "Wabi-sabi & Zen Minimalism",
     description: "Imperfect beauty, natural materials, and the poetry of empty space.",
-    cover: img("japanese wabi sabi wood interior plant natural light aesthetic", 1200),
-    images: gallery("japanese wabi sabi zen wood interior plant natural light minimal aesthetic", 24), },
+    cover: img("japanese living room wabi sabi wood interior design plant", 1200),
+    images: gallery("japanese living room bedroom wabi sabi interior design wood decor", 24), },
   { slug: "italy", name: "Italy", subtitle: "Mediterranean & Modern Classic",
     description: "Sun-drenched stone, classical proportions, effortless elegance.",
     cover: img("italian mediterranean villa stone interior terracotta aesthetic", 1200),
@@ -40,8 +40,8 @@ export const countries: Country[] = [
     images: gallery("moroccan riad marrakech zellige tile carved plaster interior aesthetic", 24), },
   { slug: "china", name: "China", subtitle: "Contemporary Eastern Aesthetics",
     description: "Ming dynasty philosophy reimagined through a modernist lens.",
-    cover: img("chinese contemporary modern courtyard interior wood plant aesthetic", 1200),
-    images: gallery("chinese modern traditional courtyard tea room wood bamboo interior aesthetic", 24), },
+    cover: img("chinese luxury modern living room interior design elegant", 1200),
+    images: gallery("chinese modern luxury living room bedroom interior design decor", 24), },
 ];
 
 // ── Designers ──

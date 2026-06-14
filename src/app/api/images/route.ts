@@ -36,14 +36,32 @@ async function getAllImages(query: string): Promise<string[]> {
   const cached = cache.get(query);
   if (cached && cached.expires > Date.now()) return cached.urls;
 
-  // Fetch from both sources in parallel
-  const [pexels, unsplash] = await Promise.all([
-    searchPexels(query),
-    searchUnsplash(query),
+  // Always add "interior design" to force interior photos
+  const mainQuery = query.includes("interior") ? query : `${query} interior design`;
+
+  // Backup query: strip to just essential keywords + interior
+  const words = query.split(" ").filter((w) => w.length > 3).slice(0, 4);
+  const backupQuery = `${words.join(" ")} home decor room`;
+
+  // Fetch both main + backup from both sources
+  const [pexels1, unsplash1, pexels2, unsplash2] = await Promise.all([
+    searchPexels(mainQuery),
+    searchUnsplash(mainQuery),
+    searchPexels(backupQuery),
+    searchUnsplash(backupQuery),
   ]);
 
-  // Merge, shuffle for variety
-  const merged = [...pexels, ...unsplash];
+  // Merge all, deduplicate, shuffle
+  const seen = new Set<string>();
+  const merged: string[] = [];
+  for (const url of [...pexels1, ...unsplash1, ...pexels2, ...unsplash2]) {
+    if (!seen.has(url)) {
+      seen.add(url);
+      merged.push(url);
+    }
+  }
+
+  // Shuffle
   for (let i = merged.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [merged[i], merged[j]] = [merged[j], merged[i]];
