@@ -8,12 +8,12 @@ export function HeroSection() {
       {/* Full-width background image — visible, not hidden */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/api/images?q=japanese%20wabi%20sabi%20zen%20living%20room%20natural%20light%20minimal&i=3&w=1800"
+          src="/api/images?q=japanese%20wabi%20sabi%20wood%20interior%20plant%20natural%20light%20minimal%20aesthetic&i=0&w=1800"
           alt=""
           className="w-full h-full object-cover"
         />
-        {/* Refined dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#2A2520]/75 via-[#2A2520]/35 to-transparent" />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1E1B18]/80 via-[#1E1B18]/40 to-transparent" />
       </div>
 
       {/* Content */}
