@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  PEXELS_API_KEY = "hkv2TWNv9xVPQSXos2Ix2PKOd2tJSnTeKHObxZWHXmAlZS5Xp7EQkBZz"
+  UNSPLASH_ACCESS_KEY = "yLjiSp1dDuCjRcx5-xN-r9Ew7kSq-vIpZ92gc4yHJAw"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

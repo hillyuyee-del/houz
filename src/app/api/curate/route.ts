@@ -24,6 +24,12 @@ const CATEGORIES = {
   "amangiri": "Amangiri Utah desert luxury hotel architecture",
   "hoxton-paris": "Hoxton Paris hotel historic interior",
   "il-sereno-como": "Il Sereno Lake Como luxury hotel",
+  "upper-house-hk": "The Upper House Hong Kong hotel interior design",
+  "bulgari-milan": "Bulgari Hotel Milan luxury interior design",
+  "soneva-fushi": "Soneva Fushi Maldives luxury resort interior",
+  "post-ranch-inn": "Post Ranch Inn Big Sur California architecture interior",
+  "marina-bay-sands": "Marina Bay Sands Singapore hotel luxury suite",
+  "ritz-paris": "Ritz Paris hotel luxury suite interior design",
   // Elements
   "sofas": "sofa living room modern design",
   "coffee-tables": "coffee table wood modern interior",
@@ -52,7 +58,7 @@ async function searchPexels(query: string): Promise<string[]> {
   if (!key) return [];
   try {
     const res = await fetch(
-      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15&orientation=landscape&size=large`,
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=30&orientation=landscape&size=large`,
       { headers: { Authorization: key } }
     );
     const data = await res.json();
@@ -65,7 +71,7 @@ async function searchUnsplash(query: string): Promise<string[]> {
   if (!key) return [];
   try {
     const res = await fetch(
-      `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=15&orientation=landscape`,
+      `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=30&orientation=landscape`,
       { headers: { Authorization: `Client-ID ${key}` } }
     );
     const data = await res.json();
