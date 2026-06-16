@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Inspiration", href: "/#inspiration" },
-  { label: "Chat", href: "/#chat" },
-  { label: "Elements", href: "/#elements" },
+  { label: "Explore", href: "/explore" },
+  { label: "Styles", href: "/styles" },
+  { label: "Hotels", href: "/hotels" },
+  { label: "Colors", href: "/colors" },
+  { label: "AI Studio", href: "/ai-studio" },
 ];
 
 export function Navbar() {
