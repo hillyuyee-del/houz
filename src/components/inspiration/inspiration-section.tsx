@@ -2,12 +2,11 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { countries, designers, hotels } from "@/lib/data";
+import { countries, designers } from "@/lib/data";
 
 const categories = [
   { key: "countries" as const, label: "Countries" },
   { key: "designers" as const, label: "Designers" },
-  { key: "hotels" as const, label: "Hotels" },
 ];
 
 function InspirationCard({
@@ -55,7 +54,7 @@ export function InspirationSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
-  const activeData = activeTab === "countries" ? countries : activeTab === "designers" ? designers : hotels;
+  const activeData = activeTab === "countries" ? countries : designers;
 
   const getSubtitle = (item: any) =>
     activeTab === "countries" ? item.subtitle :
