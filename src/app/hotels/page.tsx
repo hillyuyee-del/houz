@@ -122,7 +122,7 @@ export default function HotelsPage() {
             const colImages = C[col.slug] || [];
             const cover = colImages[0] || "";
             return (
-              <motion.a key={col.slug} href={`/explore?collection=${col.slug}`}
+              <motion.a key={col.slug} href={`/hotels`}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }} className="group cursor-pointer">
                 <div className="relative overflow-hidden rounded-2xl aspect-[16/9] bg-[#EDE8E0] mb-3">
