@@ -1,102 +1,147 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Navbar } from "@/components/navigation/navbar";
 import { Footer } from "@/components/footer/footer";
 import { Lightbox } from "@/components/shared/lightbox";
+import { Heart, Sparkles } from "lucide-react";
+import { hotelBrands, hotelCollections } from "@/lib/hotels-data";
 import curatedRaw from "@/lib/curated-images.json";
 
 const C = curatedRaw as Record<string, string[]>;
 
-const hotelKeys = ["aman-tokyo","four-seasons-florence","ace-hotel-kyoto","amangiri","hoxton-paris","il-sereno-como","upper-house-hk","bulgari-milan","soneva-fushi","post-ranch-inn","marina-bay-sands","ritz-paris"];
-
-const hotelData = [
-  { slug: "aman-tokyo", name: "Aman Tokyo", location: "Tokyo, Japan", style: "Zen Urban Sanctuary", key: "aman-tokyo" },
-  { slug: "four-seasons-florence", name: "Four Seasons Firenze", location: "Florence, Italy", style: "Renaissance Palazzo", key: "four-seasons-florence" },
-  { slug: "ace-hotel-kyoto", name: "Ace Hotel Kyoto", location: "Kyoto, Japan", style: "East-Meets-West Cool", key: "ace-hotel-kyoto" },
-  { slug: "amangiri", name: "Amangiri", location: "Utah, USA", style: "Desert Modernism", key: "amangiri" },
-  { slug: "hoxton-paris", name: "The Hoxton Paris", location: "Paris, France", style: "18th-Century Reinvented", key: "hoxton-paris" },
-  { slug: "il-sereno", name: "Il Sereno", location: "Lake Como, Italy", style: "Modernist Lakeside", key: "il-sereno-como" },
-  { slug: "upper-house", name: "The Upper House", location: "Hong Kong", style: "Zen Urban Elegance", key: "upper-house-hk" },
-  { slug: "bulgari-milan", name: "Bulgari Hotel Milano", location: "Milan, Italy", style: "Italian Modernist", key: "bulgari-milan" },
-  { slug: "soneva-fushi", name: "Soneva Fushi", location: "Maldives", style: "Barefoot Luxury", key: "soneva-fushi" },
-  { slug: "post-ranch-inn", name: "Post Ranch Inn", location: "Big Sur, USA", style: "Organic Architecture", key: "post-ranch-inn" },
-  { slug: "marina-bay-sands", name: "Marina Bay Sands", location: "Singapore", style: "Futurist Icon", key: "marina-bay-sands" },
-  { slug: "ritz-paris", name: "Ritz Paris", location: "Paris, France", style: "Belle Époque Grandeur", key: "ritz-paris" },
-  { slug: "the-brando", name: "The Brando", location: "Tetiaroa, French Polynesia", style: "Eco-Luxury Sanctuary", key: "the-brando" },
-  { slug: "fogo-island-inn", name: "Fogo Island Inn", location: "Newfoundland, Canada", style: "Architectural Minimalism", key: "fogo-island-inn" },
-  { slug: "hotel-de-crillon", name: "Hôtel de Crillon", location: "Paris, France", style: "18th-Century Grandeur", key: "hotel-de-crillon" },
-  { slug: "the-silo", name: "The Silo Hotel", location: "Cape Town, South Africa", style: "Industrial-Chic Luxury", key: "the-silo" },
-  { slug: "giraffe-manor", name: "Giraffe Manor", location: "Nairobi, Kenya", style: "Colonial Safari Elegance", key: "giraffe-manor" },
-  { slug: "adrere-amellal", name: "Adrère Amellal", location: "Siwa, Egypt", style: "Earthen Desert Refuge", key: "adrere-amellal" },
-  { slug: "hoshinoya-tokyo", name: "Hoshinoya Tokyo", location: "Tokyo, Japan", style: "Modern Onsen Ryokan", key: "hoshinoya-tokyo" },
-  { slug: "borgo-egnazia", name: "Borgo Egnazia", location: "Puglia, Italy", style: "Apulian Village Revival", key: "borgo-egnazia" },
-];
-
-const countries = ["All", "Japan", "Italy", "France", "USA", "Hong Kong", "Maldives", "Singapore"];
+// All properties flattened
+const allProperties = hotelBrands.flatMap((b) => b.properties);
 
 export default function HotelsPage() {
-  const [activeCountry, setActiveCountry] = useState("All");
+  const [activeBrand, setActiveBrand] = useState<string>("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
-  const [lightboxTitle, setLightboxTitle] = useState("");
+  const [savedImages, setSavedImages] = useState<Set<string>>(new Set());
 
-  const filtered = activeCountry === "All"
-    ? hotelData
-    : hotelData.filter(h => h.location.includes(activeCountry));
+  const filtered = activeBrand === "all"
+    ? allProperties
+    : allProperties.filter((p) => p.brand.toLowerCase() === activeBrand);
 
-  const openLightbox = (hotel: typeof hotelData[0]) => {
-    const images = C[hotel.key] || [];
-    setLightboxImages(images);
-    setLightboxIndex(0);
-    setLightboxTitle(hotel.name);
-    setLightboxOpen(true);
+  const toggleSave = (slug: string) => {
+    setSavedImages((prev) => {
+      const next = new Set(prev);
+      next.has(slug) ? next.delete(slug) : next.add(slug);
+      return next;
+    });
+  };
+
+  // Get images for a property
+  const getPropertyImages = (slug: string): string[] => {
+    // Try curated key first, fallback to search-based
+    const key = slug.replace(/-/g, " ");
+    return C[slug] || C[key] || [];
   };
 
   return (
     <>
       <Navbar />
       <main className="pt-24 pb-20 px-6 md:px-10 lg:px-14 max-w-[1600px] mx-auto">
+        {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif text-[#3D3227] mb-4" style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}>Design Hotels</h1>
-          <p className="text-[#A0988E] text-lg">The world&apos;s most beautiful hotel interiors.</p>
+          <p className="text-xs tracking-[0.2em] uppercase text-[#8FA88A] mb-3">Luxury Hospitality</p>
+          <h1 className="text-4xl md:text-5xl font-serif text-[#3D3227] mb-4" style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}>
+            Hotels & Resorts
+          </h1>
+          <p className="text-[#A0988E] text-lg max-w-[600px]">
+            The world&apos;s finest hotel interiors — from Aman sanctuaries to Bulgari palazzos.
+          </p>
         </motion.div>
 
-        {/* Country filter */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {countries.map(c => (
-            <button key={c} onClick={() => setActiveCountry(c)}
-              className={`px-5 py-2 rounded-full text-xs tracking-wide transition-all ${activeCountry === c ? "bg-[#5C4A3A] text-white" : "bg-white text-[#7A7065] border border-[#D4C4AE]/20 hover:border-[#8FA88A]/50"}`}>
-              {c}
+        {/* Brand filters */}
+        <div className="flex flex-wrap gap-2 mb-14">
+          <button onClick={() => setActiveBrand("all")}
+            className={`px-5 py-2.5 rounded-full text-xs tracking-wide transition-all ${activeBrand === "all" ? "bg-[#5C4A3A] text-white" : "bg-white text-[#7A7065] border border-[#D4C4AE]/20 hover:border-[#8FA88A]/50"}`}>
+            All Brands
+          </button>
+          {hotelBrands.map((brand) => (
+            <button key={brand.slug} onClick={() => setActiveBrand(brand.slug)}
+              className={`px-5 py-2.5 rounded-full text-xs tracking-wide transition-all ${activeBrand === brand.slug ? "bg-[#5C4A3A] text-white" : "bg-white text-[#7A7065] border border-[#D4C4AE]/20 hover:border-[#8FA88A]/50"}`}>
+              {brand.name}
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((hotel, i) => (
-            <motion.div key={hotel.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }} className="group cursor-pointer" onClick={() => openLightbox(hotel)}>
-              <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-[#EDE8E0] mb-3">
-                <img src={C[hotel.key]?.[0] || ""} alt={hotel.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3">
-                  <p className="text-white/60 text-[10px] tracking-widest uppercase">{hotel.style}</p>
-                  <p className="text-white text-sm">{hotel.location}</p>
+        {/* Brand description */}
+        {activeBrand !== "all" && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-10">
+            <p className="text-sm text-[#7A7065] max-w-[600px] leading-relaxed">
+              {hotelBrands.find((b) => b.slug === activeBrand)?.description}
+            </p>
+          </motion.div>
+        )}
+
+        {/* Properties grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-20">
+          {filtered.map((property, i) => {
+            const images = getPropertyImages(property.slug);
+            const coverImg = images[0] || "";
+            return (
+              <motion.div key={property.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04 }} className="group cursor-pointer"
+                onClick={() => { setLightboxImages(images); setLightboxIndex(0); setLightboxOpen(true); }}>
+                <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-[#EDE8E0] mb-3">
+                  <img src={coverImg} alt={property.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  <button onClick={(e) => { e.stopPropagation(); toggleSave(property.slug); }}
+                    className="absolute top-3 right-3 p-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Heart size={15} className={savedImages.has(property.slug) ? "fill-red-400 text-red-400" : "text-[#5C4A3A]"} />
+                  </button>
+                  <div className="absolute bottom-3 left-3">
+                    <p className="text-white/60 text-[10px] tracking-widest uppercase">{property.brand}</p>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-base font-serif text-[#3D3227] group-hover:text-[#8FA88A] transition-colors" style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}>{hotel.name}</h3>
-            </motion.div>
-          ))}
+                <h3 className="text-sm font-medium text-[#3D3227] group-hover:text-[#8FA88A] transition-colors">{property.name}</h3>
+                <p className="text-xs text-[#A0988E] mt-0.5">{property.location} · {property.style}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Netflix-style Collections */}
+        <div className="mb-10">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={16} className="text-[#8FA88A]" />
+            <p className="text-xs tracking-[0.2em] uppercase text-[#8FA88A]">Curated Collections</p>
+          </div>
+          <h2 className="text-2xl font-serif text-[#3D3227] mb-6" style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}>
+            Discover by Theme
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+          {hotelCollections.map((col, i) => {
+            const colImages = C[col.slug] || [];
+            const cover = colImages[0] || "";
+            return (
+              <motion.a key={col.slug} href={`/explore?collection=${col.slug}`}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }} className="group cursor-pointer">
+                <div className="relative overflow-hidden rounded-2xl aspect-[16/9] bg-[#EDE8E0] mb-3">
+                  <img src={cover} alt={col.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white text-lg font-serif" style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}>{col.title}</h3>
+                    <p className="text-white/60 text-xs mt-1 line-clamp-2">{col.description}</p>
+                  </div>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
       </main>
       <Footer />
 
       {lightboxOpen && (
-        <Lightbox images={lightboxImages} currentIndex={lightboxIndex} title={lightboxTitle}
+        <Lightbox images={lightboxImages} currentIndex={lightboxIndex}
           onClose={() => setLightboxOpen(false)}
           onPrev={() => setLightboxIndex((lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length)}
           onNext={() => setLightboxIndex((lightboxIndex + 1) % lightboxImages.length)} />
