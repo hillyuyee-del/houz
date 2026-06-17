@@ -44,3 +44,4 @@ next-env.d.ts
 scripts/run-schema.mjs
 scripts/seed-database.mjs
 src/app/api/admin/seed/route.ts
+scripts/curate-all.py

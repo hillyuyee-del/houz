@@ -3,60 +3,9 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { rooms } from "@/lib/data";
-import curatedRaw from "@/lib/curated-images.json";
-
-const C = curatedRaw as Record<string, string[]>;
-
-const colorPalettes = [
-  {
-    name: "Warm Earth",
-    mood: "Grounded & Serene",
-    colors: ["#D4C5B9", "#C4A882", "#A89880", "#8B7355", "#6B5B4F"],
-    description: "Rooted in nature — warm neutrals for quiet contemplation.",
-    image: C["wabi-minimal"]?.[2] || "",
-  },
-  {
-    name: "Sage Calm",
-    mood: "Fresh & Peaceful",
-    colors: ["#E2EBDF", "#B8C9B2", "#8FA88A", "#6B8B65", "#4A5C3F"],
-    description: "Green-driven serenity — botanical calm for every room.",
-    image: C["japan-interior"]?.[5] || "",
-  },
-  {
-    name: "Coastal Haze",
-    mood: "Airy & Luminous",
-    colors: ["#F5F0EB", "#E8E0D8", "#D4CAC0", "#C5BFB5", "#B8B0A6"],
-    description: "Misted coastlines and sun-bleached stone — effortless elegance.",
-    image: C["italy-interior"]?.[6] || "",
-  },
-  {
-    name: "Deep Cocoa",
-    mood: "Dramatic & Refined",
-    colors: ["#3C3028", "#4A3F35", "#5C4A3A", "#7A6050", "#A08464"],
-    description: "Dark, sophisticated tones — depth and drama in architectural spaces.",
-    image: C["wabi-minimal"]?.[4] || "",
-  },
-  {
-    name: "Terracotta Bloom",
-    mood: "Warm & Inviting",
-    colors: ["#C4956A", "#D4A87C", "#E8D5C0", "#F0E8DD", "#A08060"],
-    description: "Sun-baked clay and desert bloom — spaces that embrace you.",
-    image: C["morocco-interior"]?.[3] || "",
-  },
-  {
-    name: "Nordic Light",
-    mood: "Clean & Bright",
-    colors: ["#FAFAF8", "#E8E4DD", "#D5CFC7", "#C0B8AE", "#A0988E"],
-    description: "The gentle light of Nordic mornings — whisper-soft and functional.",
-    image: C["denmark-interior"]?.[7] || "",
-  },
-];
-
-type ElementsTab = "rooms" | "colors";
 
 export function ElementsSection() {
   const [activeRoom, setActiveRoom] = useState(rooms[0]);
-  const [activeTab, setActiveTab] = useState<ElementsTab>("rooms");
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -79,33 +28,10 @@ export function ElementsSection() {
           </h2>
         </div>
         <p className="body-lg text-[#A0988E] max-w-[340px]">
-          Every piece and palette tells a story. Browse furniture and color
-          schemes organized by space.
+          Every piece tells a story. Browse curated furniture and décor organized by space.
         </p>
       </motion.div>
 
-      {/* Tabs: Rooms | Colors */}
-      <div className="flex gap-1 mb-10 bg-[#EDE8E0]/60 p-1 rounded-full w-fit">
-        {[
-          { key: "rooms" as const, label: "Rooms & Furniture" },
-          { key: "colors" as const, label: "Color Palettes" },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`px-6 py-2.5 rounded-full text-sm tracking-wide transition-all duration-400 ${
-              activeTab === tab.key
-                ? "bg-white text-[#5C4A3A] shadow-sm"
-                : "text-[#A0988E] hover:text-[#5C4A3A]"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Tab: Rooms & Furniture */}
-      {activeTab === "rooms" && (
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 lg:gap-14">
           {/* Left: Room Selector */}
           <motion.div
@@ -200,62 +126,6 @@ export function ElementsSection() {
             </div>
           </motion.div>
         </div>
-      )}
-
-      {/* Tab: Color Palettes */}
-      {activeTab === "colors" && (
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {colorPalettes.map((palette, i) => (
-            <motion.div
-              key={palette.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#D4C4AE]/20"
-            >
-              {/* Palette image preview */}
-              <div className="aspect-[3/2] bg-[#EDE8E0] overflow-hidden">
-                <img
-                  src={palette.image}
-                  alt={palette.name}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              <div className="p-6">
-                <h3
-                  className="text-lg font-serif text-[#3D3227] mb-1"
-                  style={{ fontFamily: "'Playfair Display', ui-serif, Georgia, serif" }}
-                >
-                  {palette.name}
-                </h3>
-                <p className="text-xs text-[#8FA88A] mb-4">{palette.mood}</p>
-
-                {/* Color swatches */}
-                <div className="flex gap-2 mb-4">
-                  {palette.colors.map((color) => (
-                    <div key={color} className="flex-1 flex flex-col items-center gap-1.5">
-                      <div
-                        className="w-full aspect-square rounded-lg shadow-sm border border-black/5"
-                        style={{ backgroundColor: color }}
-                      />
-                      <span className="text-[9px] text-[#A0988E] font-mono">{color}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="text-xs text-[#A0988E] leading-relaxed">{palette.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      )}
     </section>
   );
 }
