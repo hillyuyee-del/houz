@@ -11,8 +11,8 @@ const CATEGORIES = {
   "morocco-interior": "moroccan living room interior design zellige tile rug lantern",
   "china-interior": "chinese modern living room interior design wood tea courtyard",
   // Style tags — highly specific to each style's defining interior elements
-  "japandi-style": "japandi living room interior design wood minimal natural light plant",
-  "wabi-sabi-style": "wabi sabi living room interior design organic plaster clay handmade",
+  "japandi-style": "japandi interior design living room wood oak neutral calm aesthetic minimal beautiful",
+  "wabi-sabi-style": "wabi sabi interior design living room organic texture clay plaster handmade beautiful aesthetic",
   "scandi-style": "scandinavian living room interior design light wood white cozy hygge",
   "french-cream-style": "parisian cream living room interior design herringbone marble moldings elegant",
   "industrial-style": "industrial loft apartment living room interior design exposed brick steel concrete",

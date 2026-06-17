@@ -56,7 +56,7 @@ export default function AboutPage() {
           <p className="text-[#7A7065] text-sm leading-relaxed mb-4">
             For collaborations, image submissions, or general inquiries:
           </p>
-          <a href="mailto:hello@aetherhouz.com" className="text-[#8FA88A] hover:text-[#6B8B65] transition-colors text-sm">hello@aetherhouz.com</a>
+          <a href="mailto:hillyuyee@gmail.com" className="text-[#8FA88A] hover:text-[#6B8B65] transition-colors text-sm">hillyuyee@gmail.com</a>
         </div>
       </main>
       <Footer />

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import curatedRaw from "@/lib/curated-images.json";
 
 const C = curatedRaw as Record<string, string[]>;
-const heroBg = C["japan-interior"]?.[3] || "";
+const heroBg = C["japandi-style"]?.[2] || C["japan-interior"]?.[5] || "";
 const preview1 = C["denmark-interior"]?.[5] || "";
 const preview2 = C["italy-interior"]?.[4] || "";
 

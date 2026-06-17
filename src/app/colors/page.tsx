@@ -11,12 +11,12 @@ const palettes = [
   { name: "Warm Earth", mood: "Grounded & Serene", colors: ["#D4C5B9","#C4A882","#A89880","#8B7355","#6B5B4F"], desc: "Rooted in nature — warm neutrals for quiet contemplation.", img: C["japan-interior"]?.[6] },
   { name: "Sage Calm", mood: "Fresh & Peaceful", colors: ["#E2EBDF","#B8C9B2","#8FA88A","#6B8B65","#4A5C3F"], desc: "Green-driven serenity — botanical calm for every room.", img: C["japan-interior"]?.[8] },
   { name: "Coastal Haze", mood: "Airy & Luminous", colors: ["#F5F0EB","#E8E0D8","#D4CAC0","#C5BFB5","#B8B0A6"], desc: "Misted coastlines and sun-bleached stone.", img: C["italy-interior"]?.[10] },
-  { name: "Deep Cocoa", mood: "Dramatic & Refined", colors: ["#3C3028","#4A3F35","#5C4A3A","#7A6050","#A08464"], desc: "Dark sophisticated tones for architectural spaces.", img: C["wabi-minimal"]?.[4] },
+  { name: "Deep Cocoa", mood: "Dramatic & Refined", colors: ["#3C3028","#4A3F35","#5C4A3A","#7A6050","#A08464"], desc: "Dark sophisticated tones for architectural spaces.", img: C["modern-luxury-style"]?.[7] },
   { name: "Terracotta Bloom", mood: "Warm & Inviting", colors: ["#C4956A","#D4A87C","#E8D5C0","#F0E8DD","#A08060"], desc: "Sun-baked clay and desert bloom — spaces that embrace.", img: C["morocco-interior"]?.[5] },
   { name: "Nordic Light", mood: "Clean & Bright", colors: ["#FAFAF8","#E8E4DD","#D5CFC7","#C0B8AE","#A0988E"], desc: "The gentle light of Nordic mornings.", img: C["denmark-interior"]?.[9] },
   { name: "Parisian Neutral", mood: "Elegant & Subtle", colors: ["#F0EBE3","#D4CAC0","#B8A898","#9C8B7B","#4A4440"], desc: "Haussmann elegance — cream walls, herringbone, marble.", img: C["france-interior"]?.[12] },
   { name: "Zen Garden", mood: "Tranquil & Meditative", colors: ["#E5DED5","#C4A882","#8B6F5E","#5C7A5C","#3C3028"], desc: "Japanese-inspired balance of warm wood and moss green.", img: C["japan-interior"]?.[14] },
-  { name: "Industrial Loft", mood: "Raw & Urban", colors: ["#D4D0CA","#B0A89E","#8C8278","#5C5248","#3A322A"], desc: "Exposed brick, steel beams, concrete floors.", img: C["concrete-arch"]?.[6] },
+  { name: "Industrial Loft", mood: "Raw & Urban", colors: ["#D4D0CA","#B0A89E","#8C8278","#5C5248","#3A322A"], desc: "Exposed brick, steel beams, concrete floors.", img: C["industrial-style"]?.[4] },
   { name: "Bali Retreat", mood: "Tropical & Serene", colors: ["#E8E0D0","#C9B896","#A89870","#7C8C6C","#4C5C3C"], desc: "Open-air living — bamboo, teak, and jungle greenery.", img: C["japan-interior"]?.[18] },
 ];
 
