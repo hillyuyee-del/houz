@@ -25,6 +25,14 @@ const hotelData = [
   { slug: "post-ranch-inn", name: "Post Ranch Inn", location: "Big Sur, USA", style: "Organic Architecture", key: "post-ranch-inn" },
   { slug: "marina-bay-sands", name: "Marina Bay Sands", location: "Singapore", style: "Futurist Icon", key: "marina-bay-sands" },
   { slug: "ritz-paris", name: "Ritz Paris", location: "Paris, France", style: "Belle Époque Grandeur", key: "ritz-paris" },
+  { slug: "the-brando", name: "The Brando", location: "Tetiaroa, French Polynesia", style: "Eco-Luxury Sanctuary", key: "the-brando" },
+  { slug: "fogo-island-inn", name: "Fogo Island Inn", location: "Newfoundland, Canada", style: "Architectural Minimalism", key: "fogo-island-inn" },
+  { slug: "hotel-de-crillon", name: "Hôtel de Crillon", location: "Paris, France", style: "18th-Century Grandeur", key: "hotel-de-crillon" },
+  { slug: "the-silo", name: "The Silo Hotel", location: "Cape Town, South Africa", style: "Industrial-Chic Luxury", key: "the-silo" },
+  { slug: "giraffe-manor", name: "Giraffe Manor", location: "Nairobi, Kenya", style: "Colonial Safari Elegance", key: "giraffe-manor" },
+  { slug: "adrere-amellal", name: "Adrère Amellal", location: "Siwa, Egypt", style: "Earthen Desert Refuge", key: "adrere-amellal" },
+  { slug: "hoshinoya-tokyo", name: "Hoshinoya Tokyo", location: "Tokyo, Japan", style: "Modern Onsen Ryokan", key: "hoshinoya-tokyo" },
+  { slug: "borgo-egnazia", name: "Borgo Egnazia", location: "Puglia, Italy", style: "Apulian Village Revival", key: "borgo-egnazia" },
 ];
 
 const countries = ["All", "Japan", "Italy", "France", "USA", "Hong Kong", "Maldives", "Singapore"];

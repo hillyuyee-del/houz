@@ -10,16 +10,16 @@ import curatedRaw from "@/lib/curated-images.json";
 const C = curatedRaw as Record<string, string[]>;
 
 const styleData = [
-  { slug: "japandi", name: "Japandi", origin: "Japan + Scandinavia", desc: "Minimal warmth — clean lines meet natural materials.", color: "#8FA88A", query: "japan-interior" },
-  { slug: "wabi-sabi", name: "Wabi-Sabi", origin: "Japan", desc: "Beauty in imperfection — celebrating the transient.", color: "#A89880", query: "wabi-minimal" },
-  { slug: "scandinavian", name: "Scandinavian", origin: "Nordic", desc: "Light-filled simplicity, functional beauty.", color: "#C5BFB5", query: "denmark-interior" },
-  { slug: "french-cream", name: "French Cream", origin: "France", desc: "Effortless elegance — classical bones, romantic spirit.", color: "#D4CAC0", query: "france-interior" },
-  { slug: "mediterranean", name: "Mediterranean", origin: "Southern Europe", desc: "Sun-drenched textures, organic forms.", color: "#C9A882", query: "italy-interior" },
-  { slug: "industrial", name: "Industrial", origin: "Global", desc: "Raw materials — exposed brick, steel, concrete.", color: "#6B6B6B", query: "concrete-arch" },
-  { slug: "minimal", name: "Minimal", origin: "Global", desc: "Less is more — spaces stripped to pure essence.", color: "#E8E0D8", query: "wabi-minimal" },
-  { slug: "modern-luxury", name: "Modern Luxury", origin: "Global", desc: "Refined opulence — rich materials, sculptural forms.", color: "#5C4A3A", query: "maximalist-luxury" },
-  { slug: "moroccan", name: "Moroccan", origin: "North Africa", desc: "Zellige tiles, carved plaster, layered textiles.", color: "#C4956A", query: "morocco-interior" },
-  { slug: "chinese-contemporary", name: "Chinese Contemporary", origin: "China", desc: "Ming philosophy through a modernist lens.", color: "#A08464", query: "china-interior" },
+  { slug: "japandi", name: "Japandi", origin: "Japan + Scandinavia", desc: "Minimal warmth — clean lines meet natural materials.", color: "#8FA88A", query: "japandi-style" },
+  { slug: "wabi-sabi", name: "Wabi-Sabi", origin: "Japan", desc: "Beauty in imperfection — organic, handmade, earthy.", color: "#A89880", query: "wabi-sabi-style" },
+  { slug: "scandinavian", name: "Scandinavian", origin: "Nordic", desc: "Light-filled simplicity, functional beauty, hygge.", color: "#C5BFB5", query: "scandi-style" },
+  { slug: "french-cream", name: "French Cream", origin: "France", desc: "Haussmann elegance — herringbone, marble, moldings.", color: "#D4CAC0", query: "french-cream-style" },
+  { slug: "mediterranean", name: "Mediterranean", origin: "Southern Europe", desc: "Terracotta, stone arches, sun-drenched warmth.", color: "#C9A882", query: "mediterranean-style" },
+  { slug: "industrial", name: "Industrial", origin: "Global", desc: "Exposed brick, steel beams, concrete — loft living.", color: "#6B6B6B", query: "industrial-style" },
+  { slug: "minimal", name: "Minimal", origin: "Global", desc: "Less is more — pure, clean, uncluttered spaces.", color: "#E8E0D8", query: "minimal-style" },
+  { slug: "modern-luxury", name: "Modern Luxury", origin: "Global", desc: "Marble, brass, velvet — refined sculptural opulence.", color: "#5C4A3A", query: "modern-luxury-style" },
+  { slug: "moroccan", name: "Moroccan", origin: "North Africa", desc: "Zellige tiles, carved plaster, lanterns, rich textiles.", color: "#C4956A", query: "moroccan-style" },
+  { slug: "chinese-contemporary", name: "Chinese Contemporary", origin: "China", desc: "Ming philosophy, wood screens, tea rooms, modern.", color: "#A08464", query: "chinese-style" },
 ];
 
 export default function StylesPage() {

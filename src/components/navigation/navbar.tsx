@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Hotels", href: "/hotels" },
   { label: "Colors", href: "/colors" },
   { label: "AI Studio", href: "/ai-studio" },
+  { label: "About", href: "/about" },
 ];
 
 export function Navbar() {

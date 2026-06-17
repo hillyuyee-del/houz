@@ -30,15 +30,30 @@ export function Footer() {
           {[
             {
               title: "Inspiration",
-              links: ["Countries", "Designers", "Hotels", "All Styles"],
+              links: [
+                { label: "Countries", href: "/explore" },
+                { label: "Hotels", href: "/hotels" },
+                { label: "Styles", href: "/styles" },
+                { label: "Colors", href: "/colors" },
+              ],
             },
             {
               title: "Elements",
-              links: ["Living Room", "Bedroom", "Kitchen", "Bathroom"],
+              links: [
+                { label: "Living Room", href: "/explore" },
+                { label: "Bedroom", href: "/explore" },
+                { label: "Kitchen", href: "/explore" },
+                { label: "Bathroom", href: "/explore" },
+              ],
             },
             {
               title: "About",
-              links: ["Our Story", "Curators", "Contact", "Journal"],
+              links: [
+                { label: "Our Story", href: "/about" },
+                { label: "Explore", href: "/explore" },
+                { label: "Styles", href: "/styles" },
+                { label: "Contact", href: "/about" },
+              ],
             },
           ].map((col) => (
             <div key={col.title}>
@@ -46,13 +61,13 @@ export function Footer() {
                 {col.title}
               </p>
               <ul className="space-y-2.5">
-                {col.links.map((link) => (
-                  <li key={link}>
+                {col.links.map((link: any) => (
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href || "#"}
                       className="text-sm text-white/35 hover:text-white/70 transition-colors duration-300"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}
