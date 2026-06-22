@@ -10,10 +10,7 @@ const roomTypes = [
 ];
 
 const formFields = [
-  { key: "area", label: "Area (sqm)", placeholder: "e.g. 85 sqm apartment", type: "text" },
-  { key: "layout", label: "Layout", placeholder: "e.g. open-plan, L-shaped", type: "text" },
   { key: "style", label: "Preferred Style", placeholder: "e.g. Japandi, Mediterranean, Scandinavian...", type: "text" },
-  { key: "budget", label: "Budget (USD)", placeholder: "e.g. $15,000 – $40,000", type: "text" },
   { key: "requirements", label: "Special Requirements", placeholder: "e.g. child-friendly, pet-friendly, home office...", type: "text" },
 ];
 
@@ -71,7 +68,7 @@ export function ChatSection() {
             </h2>
           </div>
           <p className="body-lg text-[#A0988E] max-w-[340px]">
-            Tell us about your space, pick a room, and get AI-powered design
+            Pick your preferred style and room, and get AI-powered design
             recommendations with curated imagery.
           </p>
         </motion.div>
@@ -204,7 +201,7 @@ export function ChatSection() {
                     <Send size={22} className="text-[#8FA88A]" />
                   </div>
                   <p className="text-sm text-[#A0988E] max-w-[260px] leading-relaxed">
-                    Pick a room type, fill in the details, and get AI-powered
+                    Pick a room type and your preferred style to get AI-powered
                     design advice with curated inspiration images.
                   </p>
                 </div>
